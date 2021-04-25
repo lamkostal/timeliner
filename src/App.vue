@@ -31,7 +31,7 @@ export default {
   methods:{
     addItem(e){
       this.list = e.list
-    console.log(this.list)
+    
 
     },
      clearList() {
@@ -40,7 +40,7 @@ export default {
     },
   },
   mounted(){
-    console.log(this.list)
+    
   }
 }
 </script>

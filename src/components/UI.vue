@@ -72,6 +72,7 @@ export default {
       listItem: {
         name: "Simple timeline",
         date: "",
+        formatedDate:'',
         content: "Welcome to my simple timeline tool",
       },
       list: [],
@@ -85,8 +86,11 @@ export default {
         this.listItem.content.length &&
         this.listItem.date.length
       ) {
-        this.listItem.date = new Intl.DateTimeFormat('el-GR').format(new Date(this.listItem.date))
+       
+        let formDate = new Intl.DateTimeFormat('en-gb',{calendar: 'gregory',year: 'numeric', month: '2-digit',day:'2-digit' }).format(new Date(this.listItem.date))
+        console.log('fd:'+formDate)
 
+   this.listItem.formatedDate = formDate
         this.list.push(this.listItem);
         this.listItem = { name: "", date: "", content: "" };
         this.$emit('addItem',{list:this.list})

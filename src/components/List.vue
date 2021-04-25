@@ -29,7 +29,7 @@
                 @leave="leave"
               >
                 <div class="box_inner">
-                  <p class="date" contentEditable="true">{{ item.date }}</p>
+                  <p class="date" contentEditable="true">{{ item.formatedDate }}</p>
                   <p class="name" contentEditable="true">{{ item.name }}</p>
                   <p class="content" contentEditable="true">
                     {{ item.content }}
@@ -86,9 +86,9 @@ export default {
     sortByDate() {
       return this.list
         .sort((a, b) => {
-          let dateA = new Date(a.date).getTime();
-          let dateB = new Date(b.date).getTime();
-          return dateA - dateB;
+          let dateA = new Date(a.date)
+          let dateB = new Date(b.date)
+          return dateA - dateB
         });
     },
   },
