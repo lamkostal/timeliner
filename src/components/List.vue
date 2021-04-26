@@ -159,6 +159,7 @@ export default {
 .wrap {
   display: flex;
   padding: 1em 0.8em 0.5em;
+  margin-top: 2em;
 }
 ul {
   list-style: none;
@@ -210,12 +211,11 @@ li {
 }
 .skala {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  /* flex: 0 0 3px; */
-  background: rgb(209, 209, 209);
+    top: 24px;
+    left: 0;
+    width: 2px;
+    height: calc(100% - 30px);
+    background: #d1d1d1;
 }
 li:last-of-type .skala {
   display: none;
@@ -282,14 +282,15 @@ p {
   padding: 0.1em 0;
   font-weight: 300;
   letter-spacing: 0.5px;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   margin: 0 0 0.2em;
+  color: var(--text-accent);
   
 }
 .content {
   padding: 0em 0.5em 0.5em;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 0.95rem;
+  font-weight: 300;
 }
 .form-timeline {
   position: absolute;
@@ -303,8 +304,8 @@ p {
 .form-timeline > div {
   display: flex;
   align-items: center;
-  padding: 0 2em 0 0;
-  gap: 0.2em;
+  padding: 0 1.2em 0 0;
+  gap: 0.25em;
 }
 .form-timeline input {
   margin: 0 0.2em;
@@ -318,8 +319,8 @@ p {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 45px;
+  height: 24px;
 }
 
 .switch input { 
@@ -343,9 +344,9 @@ p {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
+  height: 17px;
+  width: 17px;
+  left: 5px;
   bottom: 4px;
   background-color: white;
   -webkit-transition: .4s;
@@ -356,19 +357,15 @@ input:checked + .slider {
   background-color: var(--bg);
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--bg);
-}
-
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(17px);
+  -ms-transform: translateX(17px);
+  transform: translateX(17px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 14px;
 }
 
 .slider.round:before {

@@ -58,7 +58,6 @@ export default {
 }
 body{
   font-family: 'Open Sans',Manrope, Helvetica, Arial, sans-serif;
-
   color:var(--text);
   background: var(--bg);
   margin: 0;
