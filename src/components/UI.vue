@@ -1,30 +1,38 @@
 <template>
   <div class="ui">
     <form>
-      <div class="field">
-        <label for="name">Event name</label>
-        <div class="control">
-          <input type="text" name="name" v-model="listItem.name" />
+      <div class="form-left">
+        <div class="field">
+          <label for="name">Event name</label>
+          <div class="control">
+            <input type="text" name="name" v-model="listItem.name" />
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label for="date">date</label>
-        <div class="control">
-          <input type="date" name="date" lang="el-GR" v-model="listItem.date"/>
+        <div class="field">
+          <label for="date">date</label>
+          <div class="control">
+            <input
+              type="date"
+              name="date"
+              lang="el-GR"
+              v-model="listItem.date"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="description">description</label>
-        <div class="control">
-          <textarea
-            v-model="listItem.content"
-            placeholder="add multiple lines"
-            rows="6"
-            cols="40"
-          ></textarea>
+        <div class="field">
+          <label for="description">description</label>
+          <div class="control">
+            <textarea
+              v-model="listItem.content"
+              placeholder="add multiple lines"
+              rows="6"
+              cols="30"
+            ></textarea>
+          </div>
         </div>
       </div>
+      
     </form>
     <div class="buttons">
       <button
@@ -72,34 +80,38 @@ export default {
       listItem: {
         name: "Simple timeline",
         date: "",
-        formatedDate:'',
+        formatedDate: "",
         content: "Welcome to my simple timeline tool",
+      
       },
       list: [],
-    }
+    };
   },
-  methods:{
-     
-       addListItem(i) {
+  methods: {
+    addListItem(i) {
       if (
         this.listItem.name.length &&
         this.listItem.content.length &&
         this.listItem.date.length
       ) {
-       
-        let formDate = new Intl.DateTimeFormat('en-gb',{calendar: 'gregory',year: 'numeric', month: '2-digit',day:'2-digit' }).format(new Date(this.listItem.date))
-        console.log('fd:'+formDate)
+        let formDate = new Intl.DateTimeFormat("en-gb", {
+          calendar: "gregory",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(new Date(this.listItem.date));
+        console.log("fd:" + formDate);
 
-   this.listItem.formatedDate = formDate
+        this.listItem.formatedDate = formDate;
         this.list.push(this.listItem);
-        this.listItem = { name: "", date: "", content: "" };
-        this.$emit('addItem',{list:this.list})
-        console.log('emited')
+        this.listItem = { name: "", date: "", content: "" ,bullet:{}};
+        this.$emit("addItem", { list: this.list });
+        console.log("emited");
       }
     },
-     clearList() {
-      this.$emit('clearList')
-      this.list=[]
+    clearList() {
+      this.$emit("clearList");
+      this.list = [];
       this.listItem = { name: "", date: "", content: "" };
     },
     savePng() {
@@ -167,7 +179,6 @@ export default {
     },
   },
   computed: {
-   
     fieldsFull() {
       return (
         this.listItem.name.length &&
@@ -176,37 +187,47 @@ export default {
       );
     },
   },
-  mounted() {
-   
-  },
-
-
+  mounted() {},
 };
 </script>
 
 <style>
-    .ui {
-  padding: 7em 3em;
+.ui {
+  padding: 9em 3em 01em;
+  
+
+}
+form{
+  display: flex;
+}
+.form-right{
+  margin: 0 2em;
+}
+.form-right input{
+  width: 20px;
+  display: block;
+ 
+
 }
 .field {
   text-align: left;
-  width: 80%;
-  margin: 1em 0;
+  margin: 0.5em 0;
+  display: block;
 }
 
 .field label {
   display: inline-block;
   margin: 0 0 0.22em 0;
   color: var(--accent);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .field :is(input, textarea) {
   padding: 1em;
   border-radius: 5px;
   border: none;
-  min-width: 50%;
+  /* min-width: 50%; */
   font-size: 1rem;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 }
 :is(input, textarea):focus {
   outline-color: var(--accent);
@@ -215,21 +236,21 @@ export default {
   padding: 0.5em;
 }
 .ui .button {
-  padding: 0.6em 1em;
+  padding: 0.4em 1em;
   background: var(--accent);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   color: rgb(5, 2, 29);
-  font-size: 1.1rem;
-  font-family: 'Open Sans';
+  font-size: 1.2rem;
+  font-family: "Open Sans";
 }
 .ui .disabled {
   background: lightgrey;
   cursor: not-allowed;
 }
 .buttons {
-  margin-top: 2em;
+  margin-top: 1.5em;
   width: 100%;
   flex: 1;
   display: flex;
@@ -267,7 +288,7 @@ export default {
   z-index: -1;
 }
 .save_btns {
-  margin-top: 4em;
+  margin-top: 2em;
   display: flex;
 }
 .ui .save {

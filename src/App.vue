@@ -64,18 +64,19 @@ body{
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  --bg:rgb(21, 4, 53);
-  --bg-tl:rgb(243, 243, 244);
-  --accent:hsl(160, 87%, 58%);
+  --bg:#051e35;
+  --bg-tl:#f3f3f4;
+  --accent:hsl(160, 87%, 52%);
   --accent-h:hsl(160, 100%, 8%);
   --text:rgb(42, 43, 46);
-  --text-accent:rgb(0, 54, 99);
+  --text-accent:#478ac2;
  
 }
 .container {
   display: grid;
-  /* max-width:1200px; */
+ 
   grid-template-columns: 1fr 1fr;
+  
 }
 
 * {
