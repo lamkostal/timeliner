@@ -64,8 +64,8 @@ body{
   padding: 0;
   min-height: 100vh;
   --bg:#051e35;
-  --bg-tl:#f3f3f4;
-  --accent:hsl(160, 87%, 52%);
+  --bg-tl:#eeeeee;
+  --accent:hsl(160, 77%, 48%);
   --accent-h:hsl(160, 100%, 8%);
   --text:rgb(42, 43, 46);
   --text-accent:#478ac2;

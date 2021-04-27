@@ -15,7 +15,7 @@
         </div>
 
         <div>
-          <label for="Bullet Color">Bullet Color</label>
+          <label for="Bullet Color">Bullet</label>
           <input
             type="color"
             id="Bullet Color"
@@ -25,7 +25,7 @@
         </div>
 
         <div>
-          <label for="bullet_border">Outer Color</label>
+          <label for="bullet_border">Bullet Outline</label>
           <input
             type="color"
             id="bullet_border"

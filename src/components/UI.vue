@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="field">
-          <label for="date">date</label>
+          <label for="date">Date</label>
           <div class="control">
             <input
               type="date"
@@ -17,22 +17,25 @@
               lang="el-GR"
               v-model="listItem.date"
             />
+            <select name="dateformat" id="dateformat" v-model="selection">
+              <option value="2-digit">numeric format</option>
+              <option value="long">long format</option>
+            </select>
           </div>
         </div>
 
         <div class="field">
-          <label for="description">description</label>
+          <label for="description">Details</label>
           <div class="control">
             <textarea
               v-model="listItem.content"
-              placeholder="add multiple lines"
+              placeholder="add text here"
               rows="6"
               cols="30"
             ></textarea>
           </div>
         </div>
       </div>
-      
     </form>
     <div class="buttons">
       <button
@@ -44,7 +47,7 @@
       >
         add item
       </button>
-      <span v-if="!fieldsFull">fill all fields</span>
+      <span v-if="!fieldsFull">fill required fields</span>
 
       <button
         id="clear"
@@ -57,12 +60,36 @@
     </div>
     <div class="save_btns">
       <button id="png" class="button save" @click="savePng">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title />
+          <g>
+            <path
+              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+            />
+          </g>
+        </svg>
         download <strong>png</strong>
       </button>
       <button id="jpeg" class="button save" @click="saveJpeg">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title />
+          <g>
+            <path
+              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+            />
+          </g>
+        </svg>
         download <strong>jpeg</strong>
       </button>
       <button id="svg" class="button save" @click="saveSvg">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title />
+          <g>
+            <path
+              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+            />
+          </g>
+        </svg>
         download <strong>svg</strong>
       </button>
     </div>
@@ -75,14 +102,14 @@ import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
+      selection: "2-digit",
       isVisible: false,
       isXvisible: true,
       listItem: {
-        name: "Simple timeline",
+        name: "Simple timeliner",
         date: "",
         formatedDate: "",
         content: "Welcome to my simple timeline tool",
-      
       },
       list: [],
     };
@@ -97,14 +124,14 @@ export default {
         let formDate = new Intl.DateTimeFormat("en-gb", {
           calendar: "gregory",
           year: "numeric",
-          month: "2-digit",
+          month: this.selection,
           day: "2-digit",
         }).format(new Date(this.listItem.date));
         console.log("fd:" + formDate);
 
         this.listItem.formatedDate = formDate;
         this.list.push(this.listItem);
-        this.listItem = { name: "", date: "", content: "" ,bullet:{}};
+        this.listItem = { name: "", date: "", content: "", bullet: {} };
         this.$emit("addItem", { list: this.list });
         console.log("emited");
       }
@@ -194,20 +221,16 @@ export default {
 <style>
 .ui {
   padding: 9em 3em 01em;
-  
-
 }
-form{
+form {
   display: flex;
 }
-.form-right{
+.form-right {
   margin: 0 2em;
 }
-.form-right input{
+.form-right input {
   width: 20px;
   display: block;
- 
-
 }
 .field {
   text-align: left;
@@ -221,15 +244,19 @@ form{
   color: var(--accent);
   font-size: 1rem;
 }
-.field :is(input, textarea) {
+.field :is(input, textarea, select) {
   padding: 1em;
   border-radius: 5px;
   border: none;
   /* min-width: 50%; */
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: "Open Sans";
 }
-:is(input, textarea):focus {
+.field select {
+  padding: 0.5em;
+  margin: 0 1em;
+}
+:is(input, textarea, select):focus {
   outline-color: var(--accent);
 }
 ::-webkit-datetime-edit {
@@ -261,12 +288,13 @@ form{
 }
 .buttons span {
   position: absolute;
-  top: 60px;
+  top: -30px;
   left: 20px;
   background: #fff;
-  padding: 0.3em;
+  padding: 0.1em 0.5em;
   border-radius: 2px;
   opacity: 0;
+  font-size: 0.8rem;
 }
 .buttons span {
   transition: all 0.2s;
@@ -282,9 +310,9 @@ form{
   height: 10px;
   background: #fff;
   position: absolute;
-  top: -5px;
+  top: 15px;
   left: 15px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
   z-index: -1;
 }
 .save_btns {
@@ -295,6 +323,9 @@ form{
   margin: 0.5em 0.5em 0 0;
   font-size: 0.8rem;
   background: var(--bg-tl);
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
 }
 strong {
   font-size: 1.2em;
@@ -304,4 +335,13 @@ strong {
   font-size: 0.8rem;
   background: var(--accent);
 }
+.save svg {
+  width: 22px;
+  margin: auto;
+}
+.save path{
+    fill:var(--bg)
+
+}
+
 </style>
