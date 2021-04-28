@@ -21,6 +21,21 @@
               <option value="2-digit">numeric format</option>
               <option value="long">long format</option>
             </select>
+            <select
+              name="lang"
+              id="lang"
+              v-model="lang"
+              v-if="selection === 'long'"
+            >
+              <option value="en-GB">english - UK</option>
+              <option value="en-US">english - US</option>
+              <option value="gr">greek</option>
+              <option value="de">german</option>
+              <option value="fr">french</option>
+              <option value="es">spanish</option>
+              <option value="ita">italian</option>
+              <option value="nl">dutch</option>
+            </select>
           </div>
         </div>
 
@@ -56,6 +71,14 @@
         @click="clearList"
       >
         clear timeline
+      </button>
+       <button
+        id="save"
+        :class="{ disabled: !list.length }"
+        class="button"
+        @click="saveList"
+      >
+        save timeline
       </button>
     </div>
     <div class="save_btns">
@@ -102,10 +125,12 @@ import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
+      lang: "en-GB",
       selection: "2-digit",
       isVisible: false,
       isXvisible: true,
       listItem: {
+        id:function(){return Math.random()},
         name: "Simple timeliner",
         date: "",
         formatedDate: "",
@@ -121,7 +146,7 @@ export default {
         this.listItem.content.length &&
         this.listItem.date.length
       ) {
-        let formDate = new Intl.DateTimeFormat("en-gb", {
+        let formDate = new Intl.DateTimeFormat(this.lang, {
           calendar: "gregory",
           year: "numeric",
           month: this.selection,
@@ -140,6 +165,9 @@ export default {
       this.$emit("clearList");
       this.list = [];
       this.listItem = { name: "", date: "", content: "" };
+    },
+    saveList(){
+      this.$emit('saveList')
     },
     savePng() {
       this.isXvisible = false;
@@ -214,7 +242,13 @@ export default {
       );
     },
   },
-  mounted() {},
+  mounted() {
+    let retrieveddata = localStorage.getItem('mylist') 
+   console.log(retrieveddata)
+   let storedList = JSON.parse(retrieveddata)
+
+    this.list = storedList   || []
+  },
 };
 </script>
 
@@ -254,7 +288,7 @@ form {
 }
 .field select {
   padding: 0.5em;
-  margin: 0 1em;
+  margin: 0 0 0 0.8em;
 }
 :is(input, textarea, select):focus {
   outline-color: var(--accent);
@@ -339,9 +373,7 @@ strong {
   width: 22px;
   margin: auto;
 }
-.save path{
-    fill:var(--bg)
-
+.save path {
+  fill: var(--bg);
 }
-
 </style>

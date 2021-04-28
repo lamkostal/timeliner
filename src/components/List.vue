@@ -36,7 +36,7 @@
       </div>
       <div class="wrap">
         <ul>
-          <li v-for="(item, index) in sortByDate" :key="item.name">
+          <li v-for="(item, index) in sortByDate" :key="item.id">
             <transition name="fade">
               <button
                 class="close"
@@ -60,15 +60,15 @@
               <transition
                 appear
                 @enter="enter"
-                @before-leave="beforeLeave"
+               
                 @leave="leave"
               >
                 <div class="box_inner" :style="[isDarkmode? userStyle:{'box-bg':'white'}]">
-                  <p class="date" contentEditable="true">
+                  <p class="date" >
                     {{ item.formatedDate }}
                   </p>
-                  <p class="name" contentEditable="true">{{ item.name }}</p>
-                  <p class="content" contentEditable="true">
+                  <p class="name editable" contentEditable="true" @input="editName($event,index)">{{ item.name }}</p>
+                  <p class="content editable" contentEditable="true" @input="editContent($event,index)">
                     {{ item.content }}
                   </p>
                 </div>
@@ -97,9 +97,9 @@ export default {
         color: "#003663",
         bordercolor: "#3fb7de",
       },
+      
     };
   },
-
   methods: {
     enter(el, done) {
       gsap.from(el, {
@@ -111,21 +111,26 @@ export default {
         ease: "bounce.out",
       });
     },
-
-    beforeLeave(el, done) {
-      console.log("befleave");
-
-      gsap.set(el, { transformOrigin: "0 0", rotationY: 0, onComplete: done });
-    },
     leave(el, done) {
       console.log("leave");
       gsap.to(el, { duration: 0.8, transformOrigin: "0 0", opacity: 0 });
       done();
     },
-
     removeItem(i) {
-      this.list.splice(i, 1);
+      this.$emit('removeItem',i)
     },
+    editDate(event,index){
+      console.log('emit edit from list')
+      this.$emit('editDate',{edit:event.target.innerText,index:index})
+    },
+    editName(event,index){
+      console.log('emit edit from list')
+      this.$emit('editName',{edit:event.target.innerText,index:index})
+    },
+    editContent(event,index){
+      console.log('emit edit from list')
+      this.$emit('editContent',{edit:event.target.innerText,index:index})
+    }
   },
   computed: {
      userStyle(){
@@ -140,7 +145,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.sortByDate);
+    // console.log(this.sortByDate);
   },
 };
 </script>
@@ -237,6 +242,7 @@ li:last-of-type .skala {
 }
   
 .box_inner {
+  transition:background-color 0.3s;
   --box-bg:#fff;
   border-radius: 4px;
   margin: 0 0 0.5em;
@@ -247,6 +253,7 @@ li:last-of-type .skala {
   color: var(--text);
 }
 .box_inner::before {
+  transition:all 0.3s;
   content: "";
   width: 15px;
   height: 15px;
@@ -268,9 +275,9 @@ p {
   margin: 0 0 0.3em;
   max-width: 25ch;
 }
-.box > * {
-  /* background: rgb(214, 214, 214); */
-  cursor: text;
+.editable {
+ 
+  cursor: crosshair;
 }
 .name {
   text-transform: uppercase;
@@ -310,6 +317,7 @@ p {
 .form-timeline input {
   margin: 0 0.2em;
   width: 20px;
+  box-sizing: content-box;
 }
 .form-timeline label {
   font-size: 0.8rem;
