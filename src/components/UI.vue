@@ -17,25 +17,27 @@
               lang="el-GR"
               v-model="listItem.date"
             />
-            <select name="dateformat" id="dateformat" v-model="selection">
-              <option value="2-digit">numeric format</option>
-              <option value="long">long format</option>
-            </select>
-            <select
-              name="lang"
-              id="lang"
-              v-model="lang"
-              v-if="selection === 'long'"
-            >
-              <option value="en-GB">english - UK</option>
-              <option value="en-US">english - US</option>
-              <option value="gr">greek</option>
-              <option value="de">german</option>
-              <option value="fr">french</option>
-              <option value="es">spanish</option>
-              <option value="ita">italian</option>
-              <option value="nl">dutch</option>
-            </select>
+          <div class="field">
+              <select name="dateformat" id="dateformat" v-model="selection">
+                <option value="2-digit">numeric format</option>
+                <option value="long">long format</option>
+              </select>
+              <select
+                name="lang"
+                id="lang"
+                v-model="lang"
+                v-if="selection === 'long'"
+              >
+                <option value="en-GB">english - UK</option>
+                <option value="en-US">english - US</option>
+                <option value="gr">greek</option>
+                <option value="de">german</option>
+                <option value="fr">french</option>
+                <option value="es">spanish</option>
+                <option value="ita">italian</option>
+                <option value="nl">dutch</option>
+              </select>
+          </div>
           </div>
         </div>
 
@@ -62,27 +64,34 @@
       >
         add item
       </button>
-      <span v-if="!fieldsFull">fill required fields</span>
+      <span class='additem-pop' v-if="!fieldsFull">fill required fields</span>
 
       <button
         id="clear"
-        :class="{ disabled: !list.length }"
         class="button"
         @click="clearList"
+        :disabled="!list.length"
+        :class="{ disabled: !list.length }"
       >
         clear timeline
       </button>
        <button
         id="save"
-        :class="{ disabled: !list.length }"
         class="button"
         @click="saveList"
       >
         save timeline
       </button>
+      <span class="tl-pop">timeline saved!</span>
+
     </div>
+
+     
+    
     <div class="save_btns">
-      <button id="png" class="button save" @click="savePng">
+      <span>Download as image</span><br>
+      <button id="png" class="button save" @click="savePng"    :disabled="!list.length"
+        :class="{ disabled: !list.length }">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <title />
           <g>
@@ -91,9 +100,10 @@
             />
           </g>
         </svg>
-        download <strong>png</strong>
+        <strong>png</strong>
       </button>
-      <button id="jpeg" class="button save" @click="saveJpeg">
+      <button id="jpeg" class="button save" @click="saveJpeg"    :disabled="!list.length"
+        :class="{ disabled: !list.length }">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <title />
           <g>
@@ -102,9 +112,10 @@
             />
           </g>
         </svg>
-        download <strong>jpeg</strong>
+       <strong>jpeg</strong>
       </button>
-      <button id="svg" class="button save" @click="saveSvg">
+      <button id="svg" class="button save" @click="saveSvg" :disabled="!list.length"
+        :class="{ disabled: !list.length }">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <title />
           <g>
@@ -113,7 +124,7 @@
             />
           </g>
         </svg>
-        download <strong>svg</strong>
+         <strong>svg</strong>
       </button>
     </div>
   </div>
@@ -121,7 +132,8 @@
 
 <script>
 import domtoimage from "dom-to-image";
-
+import {gsap} from 'gsap';
+ 
 export default {
   data() {
     return {
@@ -168,6 +180,25 @@ export default {
     },
     saveList(){
       this.$emit('saveList')
+      let tlpop = '.tl-pop'
+     
+      let mytl = gsap.timeline()
+      mytl
+       .to('.svg_container circle',{
+        transformOrigin:'center center',
+        fill:'red',
+        duration:0.2
+      })
+      .to('.svg_container circle',{
+        scale:1,
+        fill:'none',
+        stagger:0.1})
+      .to(tlpop,{opacity:1,duration:0.2},0)
+      .to(tlpop,{y:-10,ease:'bounce.out',duration:0.5},'<')
+      .to(tlpop,{delay:0.4,opacity:0,y:0})
+     
+
+
     },
     savePng() {
       this.isXvisible = false;
@@ -288,7 +319,7 @@ form {
 }
 .field select {
   padding: 0.5em;
-  margin: 0 0 0 0.8em;
+  margin: 0 0.8em 0 0;
 }
 :is(input, textarea, select):focus {
   outline-color: var(--accent);
@@ -297,6 +328,7 @@ form {
   padding: 0.5em;
 }
 .ui .button {
+  transition: transform 0.2s;
   padding: 0.4em 1em;
   background: var(--accent);
   border: none;
@@ -306,9 +338,9 @@ form {
   font-size: 1.2rem;
   font-family: "Open Sans";
 }
-.ui .disabled {
-  background: lightgrey;
-  cursor: not-allowed;
+.button:active{
+  box-shadow: inset 0 0 15px #fff;
+  transform: translateY(-4px);
 }
 .buttons {
   margin-top: 1.5em;
@@ -320,8 +352,8 @@ form {
   align-items: center;
   gap: 20px;
 }
-.buttons span {
-  position: absolute;
+.additem-pop{
+position: absolute;
   top: -30px;
   left: 20px;
   background: #fff;
@@ -330,15 +362,37 @@ form {
   opacity: 0;
   font-size: 0.8rem;
 }
-.buttons span {
+.tl-pop{
+  position: absolute;
+  top: -40px;
+  left: 60%;
+  background: #fff;
+  padding: 0.1em 0.5em;
+  border-radius: 2px;
+  opacity: 0;
+  font-size: 0.9rem;
+  
+}
+.tl-pop::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  position: absolute;
+  top: 15px;
+  left: 55px;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.additem-pop {
   transition: all 0.2s;
   transition-delay: 0.5s;
 }
-.buttons button:hover + span {
+.buttons button:hover + .additem-pop {
   opacity: 1;
   display: block;
 }
-.buttons span::after {
+.additem-pop::after {
   content: "";
   width: 10px;
   height: 10px;
@@ -352,11 +406,18 @@ form {
 .save_btns {
   margin-top: 2em;
   display: flex;
+  gap: 0.2em;
+}
+.save_btns span{
+ align-self: flex-end;
+  color:var(--accent);
+  padding: 0 1em 0em 0;
+
 }
 .ui .save {
   margin: 0.5em 0.5em 0 0;
   font-size: 0.8rem;
-  background: var(--bg-tl);
+  background: var(--accent);
   display: flex;
   align-items: center;
   gap: 0.2em;
@@ -365,15 +426,15 @@ strong {
   font-size: 1.2em;
   color: blue;
 }
-.ui .save:hover {
-  font-size: 0.8rem;
-  background: var(--accent);
-}
 .save svg {
   width: 22px;
   margin: auto;
 }
 .save path {
   fill: var(--bg);
+}
+.ui .disabled {
+  background: lightgrey;
+  cursor: not-allowed;
 }
 </style>
