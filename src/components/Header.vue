@@ -44,4 +44,18 @@ export default {
         font-size: 2.5rem;
 
     }
+    @media (max-width:700px){
+   .wrapper h1{
+        padding: 0.2em;
+        margin: 0;
+        font-family: 'Galada', cursive;
+        font-weight: 400;
+        font-size: 1.8rem;
+
+
+    }
+      .svg_container{
+        width: 110px;
+    }
+}
 </style>

@@ -68,7 +68,7 @@ export default {
   font-family: "Open Sans", Manrope, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
 }
 body {
   font-family: "Open Sans", Manrope, Helvetica, Arial, sans-serif;
@@ -83,11 +83,21 @@ body {
   --accent-h: hsl(160, 100%, 8%);
   --text: rgb(42, 43, 46);
   --text-accent: #478ac2;
+  --btn-active:rgb(104, 50, 255);
 }
 .container {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
+}
+@media (max-width:700px){
+  .container {
+  display: grid;
+  grid-template-columns: 1fr ;
+}
+.ui{
+  padding:5em 1.5em 1.5em;
+  grid-row: 1;
+}
 }
 
 * {

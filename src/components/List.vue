@@ -161,9 +161,43 @@ export default {
   padding: 9.5em 0;
   box-sizing: border-box;
 }
+.form-timeline {
+  position: absolute;
+  top: 6.5em;
+  left: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.form-timeline > div {
+  display: flex;
+  align-items: center;
+  padding: 0 1.2em 0 0;
+  gap: 0.25em;
+}
+.form-timeline input {
+  margin: 0 0.2em;
+  width: 20px;
+  box-sizing: content-box;
+}
+.form-timeline label {
+  font-size: 0.8rem;
+}
+
+@media (max-width:700px){
+  .timeline {
+  
+  padding: 1.5em 0;
+  
+}
+.form-timeline {
+  top: 1.5em;
+}
+}
 .wrap {
   display: flex;
-  padding: 1em 0.8em 0.5em;
+  padding: 2em 1em;
   margin-top: 2em;
 }
 ul {
@@ -298,29 +332,6 @@ p {
   padding: 0em 0.5em 0.5em;
   font-size: 0.95rem;
   font-weight: 300;
-}
-.form-timeline {
-  position: absolute;
-  top: 6.5em;
-  left: 0;
-  margin: 0;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-.form-timeline > div {
-  display: flex;
-  align-items: center;
-  padding: 0 1.2em 0 0;
-  gap: 0.25em;
-}
-.form-timeline input {
-  margin: 0 0.2em;
-  width: 20px;
-  box-sizing: content-box;
-}
-.form-timeline label {
-  font-size: 0.8rem;
 }
 
 /* toggle switch styling */

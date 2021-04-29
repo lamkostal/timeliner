@@ -81,51 +81,55 @@
         @click="saveList"
       >
         save timeline
-      </button>
       <span class="tl-pop">timeline saved!</span>
+
+      </button>
 
     </div>
 
      
     
-    <div class="save_btns">
-      <span>Download as image</span><br>
-      <button id="png" class="button save" @click="savePng"    :disabled="!list.length"
-        :class="{ disabled: !list.length }">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <title />
-          <g>
-            <path
-              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
-            />
-          </g>
-        </svg>
-        <strong>png</strong>
-      </button>
-      <button id="jpeg" class="button save" @click="saveJpeg"    :disabled="!list.length"
-        :class="{ disabled: !list.length }">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <title />
-          <g>
-            <path
-              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
-            />
-          </g>
-        </svg>
-       <strong>jpeg</strong>
-      </button>
-      <button id="svg" class="button save" @click="saveSvg" :disabled="!list.length"
-        :class="{ disabled: !list.length }">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <title />
-          <g>
-            <path
-              d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
-            />
-          </g>
-        </svg>
-         <strong>svg</strong>
-      </button>
+    <div class="export_sect">
+      <span>Download as image</span>
+
+     <div class="save_btns">
+        <button id="png" class="button save" @click="savePng"    :disabled="!list.length"
+          :class="{ btn_active: list.length }">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title />
+            <g>
+              <path
+                d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+              />
+            </g>
+          </svg>
+          <strong>png</strong>
+        </button>
+        <button id="jpeg" class="button save" @click="saveJpeg"    :disabled="!list.length"
+          :class="{ btn_active: list.length }">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title />
+            <g>
+              <path
+                d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+              />
+            </g>
+          </svg>
+         <strong>jpeg</strong>
+        </button>
+        <button id="svg" class="button save" @click="saveSvg" :disabled="!list.length"
+          :class="{  btn_active: list.length }">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title />
+            <g>
+              <path
+                d="M14.41,2H4V22H20V7.59ZM12,18.41l-3.71-3.7,1.42-1.42L11,14.59V10h2v4.59l1.29-1.3,1.42,1.42ZM15,7V5.41L16.59,7Z"
+              />
+            </g>
+          </svg>
+           <strong>svg</strong>
+        </button>
+     </div>
     </div>
   </div>
 </template>
@@ -329,7 +333,7 @@ form {
 }
 .ui .button {
   transition: transform 0.2s;
-  padding: 0.4em 1em;
+  padding: 0.3em 0.8em;
   background: var(--accent);
   border: none;
   border-radius: 4px;
@@ -344,13 +348,12 @@ form {
 }
 .buttons {
   margin-top: 1.5em;
-  width: 100%;
-  flex: 1;
+  width:100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap:0.8em;
 }
 .additem-pop{
 position: absolute;
@@ -365,7 +368,7 @@ position: absolute;
 .tl-pop{
   position: absolute;
   top: -40px;
-  left: 60%;
+  left: 30px;
   background: #fff;
   padding: 0.1em 0.5em;
   border-radius: 2px;
@@ -404,28 +407,33 @@ position: absolute;
   z-index: -1;
 }
 .save_btns {
-  margin-top: 2em;
   display: flex;
   gap: 0.2em;
 }
-.save_btns span{
- align-self: flex-end;
+.export_sect{
+   margin-top: 2em;
+}
+ .export_sect span{
+ text-align: left;
   color:var(--accent);
-  padding: 0 1em 0em 0;
+ 
 
 }
 .ui .save {
   margin: 0.5em 0.5em 0 0;
   font-size: 0.8rem;
-  background: var(--accent);
+  background: lightgrey;
+  cursor: not-allowed;
   display: flex;
   align-items: center;
   gap: 0.2em;
 }
 strong {
   font-size: 1.2em;
-  color: blue;
 }
+.ui .btn_active{
+  cursor: pointer;
+  color: var(--btn-active)}
 .save svg {
   width: 22px;
   margin: auto;
