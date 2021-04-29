@@ -1,4 +1,5 @@
 <template>
+ <transition name="fade"> <Modal /></transition>
   <Header />
   <div class="container">
     <List :list="list" @removeItem="removeItem" 
@@ -13,6 +14,7 @@
 import List from "./components/List.vue";
 import UI from "./components/UI.vue";
 import Header from "./components/Header.vue";
+import Modal from "./components/Modal.vue"
 
 export default {
   name: "App",
@@ -20,6 +22,7 @@ export default {
     UI,
     List,
     Header,
+    Modal
   },
   data() {
     return {

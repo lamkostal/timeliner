@@ -23,7 +23,6 @@
             v-model="bullet.color"
           />
         </div>
-
         <div>
           <label for="bullet_border">Bullet Outline</label>
           <input
@@ -55,7 +54,6 @@
                 }"
               ></div
             ></transition>
-
             <div class="box">
               <transition
                 appear
@@ -146,6 +144,11 @@ export default {
   },
   mounted() {
     // console.log(this.sortByDate);
+     console.log(window.innerWidth)
+
+   if( window.innerWidth<700){
+     this.isXvisible=true
+   }
   },
 };
 </script>
@@ -209,7 +212,7 @@ ul {
   flex-direction: column;
   margin: 0;
 }
-li {
+.timeline li {
   width: 250px;
   transition: all 0.5s ease-in-out;
   display: flex;
