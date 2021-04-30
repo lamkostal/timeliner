@@ -2,14 +2,14 @@
   <div class="modal_container" v-if="modalOpen" @click="modalOpen=false">
       <div class="modal_content">
           <p>Welcome to simple timeliner</p>
-          <span>the tool that helps you:</span>
+          <span>a tool to create timelines</span>
           <ul>
-            <li>Create your timeline</li>
-            <li>Sort entries by date</li>
+          
+            <li>Sorted entries by date</li>
             <li>Choose date format and language</li>
             <li>Customize colors</li>
-            <li>Export your timeline as png,jpeg,svg</li>
-            <li>Save your timeline for later, it will be there if you reopen browser*</li>
+            <li>Export your timeline as png, jpeg or svg</li>
+            <li>Save your timeline for later, it will be there when you visit again*</li>
           </ul>
             <p>Enjoy!</p>
             <span class="asterisc">*saving uses browsers local storage, erasing browsing data will affect your saves.</span>
@@ -75,18 +75,19 @@ mounted(){
      }
      .modal_content ul{
          list-style: inside;
+         max-width: 60ch;
          
      }
       .modal_content li{
-         max-width:80vw;
-         padding: 0.5rem  ;
+         /* max-width:90vw; */
+         padding: 0.4rem  ;
          margin-left: 1em;
          width:auto;
      }
       .modal_content li::marker{
-          content:':)  ';
+          content:'✔  ';
          color:var(--btn-active);
-         font-size: 1em;
+         font-size: 1.5em;
       }
 
 

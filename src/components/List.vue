@@ -44,7 +44,10 @@
               ></button>
             </transition>
 
-            <div class="skala"></div>
+         
+              <div class="skala">
+                </div>
+          
             <transition appear name="fade">
               <div
                 class="bullet"
@@ -89,7 +92,7 @@ export default {
     return {
       boxbg:'#051e35',
       isVisible: false,
-      isXvisible: true,
+      isXvisible: false,
       isDarkmode:false,
       bullet: {
         color: "#003663",
@@ -146,7 +149,7 @@ export default {
     // console.log(this.sortByDate);
      console.log(window.innerWidth)
 
-   if( window.innerWidth<700){
+   if(window.innerWidth<1000){
      this.isXvisible=true
    }
   },
@@ -252,15 +255,20 @@ ul {
   transform: rotate(-45deg);
 }
 .skala {
+  transition:all 0.2s;
   position: absolute;
     top: 24px;
     left: 0;
     width: 2px;
     height: calc(100% - 30px);
     background: #d1d1d1;
+    opacity: 1;
+    transform: translateY(0);
 }
 li:last-of-type .skala {
-  display: none;
+  opacity: 0;
+  transform:translateY(30px);
+  /* display: none; */
 }
 .bullet {
   position: absolute;
@@ -305,8 +313,8 @@ li:last-of-type .skala {
 :is(.name, .date, .content):focus {
   border: none;
   outline: none;
-  color: var(--text-accent);
-  background: rgb(247, 247, 247);
+  color: rgb(2, 94, 17);
+  background: rgb(255, 255, 255);
 }
 p {
   margin: 0 0 0.3em;
@@ -318,22 +326,22 @@ p {
 }
 .name {
   text-transform: uppercase;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   
 }
 .date {
-  padding: 0.1em 0;
+  padding: 0em 0;
   font-weight: 300;
-  letter-spacing: 0.5px;
-  font-size: 1.25rem;
+  letter-spacing: 0.3px;
+  font-size: 1.4rem;
   margin: 0 0 0.2em;
   color: var(--text-accent);
   
 }
 .content {
   padding: 0em 0.5em 0.5em;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
