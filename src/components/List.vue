@@ -9,7 +9,7 @@
         <div>
           <label for="darkmode">dark mode</label>
           <label class="switch">
-            <input type="checkbox" name="darkmode" v-model='isDarkmode'/>
+            <input type="checkbox" name="darkmode" v-model="isDarkmode" />
             <span class="slider round"></span>
           </label>
         </div>
@@ -44,10 +44,8 @@
               ></button>
             </transition>
 
-         
-              <div class="skala">
-                </div>
-          
+            <div class="skala"></div>
+
             <transition appear name="fade">
               <div
                 class="bullet"
@@ -58,20 +56,76 @@
               ></div
             ></transition>
             <div class="box">
-              <transition
-                appear
-                @enter="enter"
-               
-                @leave="leave"
-              >
-                <div class="box_inner" :style="[isDarkmode? userStyle:{'box-bg':'white'}]">
-                  <p class="date" >
+              <transition appear @enter="enter" @leave="leave">
+                <div
+                  class="box_inner"
+                  :style="[isDarkmode ? userStyle : { 'box-bg': 'white' }]"
+                >
+                  <p class="date">
                     {{ item.formatedDate }}
                   </p>
-                  <p class="name editable" contentEditable="true" @input="editName($event,index)">{{ item.name }}</p>
-                  <p class="content editable" contentEditable="true" @input="editContent($event,index)">
-                    {{ item.content }}
-                  </p>
+                <div class="entry-blok">
+                    <p
+                      class="name editable"
+                      contenteditable="true"
+                      @focusout="editName($event, index)"
+                    >
+                      {{ item.name }}
+                    </p>
+                      <svg
+                         v-if="isXvisible"
+                        xmlns="http://www.w3.org/2000/svg"
+                       
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
+                        />
+                        <path
+                          d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
+                        />
+                        <line x1="16" y1="5" x2="19" y2="8" />
+                      </svg>
+                </div>
+                 <div class="entry-blok">
+                    <p
+                      class="content editable"
+                      contenteditable="true"
+                      @focusout="editContent($event, index)"
+                    >
+                     
+                      {{ item.content }}
+                    </p>
+                     <svg v-if="isXvisible"
+                        xmlns="http://www.w3.org/2000/svg"
+                  
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
+                        />
+                        <path
+                          d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
+                        />
+                        <line x1="16" y1="5" x2="19" y2="8" />
+                      </svg>
+                 </div>
                 </div>
               </transition>
             </div>
@@ -87,18 +141,17 @@ import { gsap } from "gsap";
 
 export default {
   props: ["list"],
- 
+
   data() {
     return {
-      boxbg:'#051e35',
+      boxbg: "#051e35",
       isVisible: false,
       isXvisible: false,
-      isDarkmode:false,
+      isDarkmode: false,
       bullet: {
         color: "#003663",
         bordercolor: "#3fb7de",
       },
-      
     };
   },
   methods: {
@@ -118,24 +171,21 @@ export default {
       done();
     },
     removeItem(i) {
-      this.$emit('removeItem',i)
+      this.$emit("removeItem", i);
     },
-    editDate(event,index){
-      console.log('emit edit from list')
-      this.$emit('editDate',{edit:event.target.innerText,index:index})
+   
+    editName(event, index) {
+      console.log("emit edit from list");
+      this.$emit("editName", { edit: event.target.innerText, index: index });
     },
-    editName(event,index){
-      console.log('emit edit from list')
-      this.$emit('editName',{edit:event.target.innerText,index:index})
+    editContent(event, index) {
+      console.log("emit edit from list");
+      this.$emit("editContent", { edit: event.target.innerText, index: index });
     },
-    editContent(event,index){
-      console.log('emit edit from list')
-      this.$emit('editContent',{edit:event.target.innerText,index:index})
-    }
   },
   computed: {
-     userStyle(){
-      return {'--box-bg':this.boxbg,'--text':'#fff' }
+    userStyle() {
+      return { "--box-bg": this.boxbg, "--text": "#fff" };
     },
     sortByDate() {
       return this.list.sort((a, b) => {
@@ -147,11 +197,11 @@ export default {
   },
   mounted() {
     // console.log(this.sortByDate);
-     console.log(window.innerWidth)
+    console.log(window.innerWidth);
 
-   if(window.innerWidth<1000){
-     this.isXvisible=true
-   }
+    if (window.innerWidth < 1000) {
+      this.isXvisible = true;
+    }
   },
 };
 </script>
@@ -191,15 +241,13 @@ export default {
   font-size: 0.8rem;
 }
 
-@media (max-width:700px){
+@media (max-width: 700px) {
   .timeline {
-  
-  padding: 1.5em 0;
-  
-}
-.form-timeline {
-  top: 1.5em;
-}
+    padding: 1.5em 0;
+  }
+  .form-timeline {
+    top: 1.5em;
+  }
 }
 .wrap {
   display: flex;
@@ -255,19 +303,19 @@ ul {
   transform: rotate(-45deg);
 }
 .skala {
-  transition:all 0.2s;
+  transition: all 0.2s;
   position: absolute;
-    top: 24px;
-    left: 0;
-    width: 2px;
-    height: calc(100% - 30px);
-    background: #d1d1d1;
-    opacity: 1;
-    transform: translateY(0);
+  top: 24px;
+  left: 0;
+  width: 2px;
+  height: calc(100% - 30px);
+  background: #d1d1d1;
+  opacity: 1;
+  transform: translateY(0);
 }
 li:last-of-type .skala {
   opacity: 0;
-  transform:translateY(30px);
+  transform: translateY(30px);
   /* display: none; */
 }
 .bullet {
@@ -282,30 +330,28 @@ li:last-of-type .skala {
 
 .box {
   text-align: left;
-  
-
 }
-  
+
 .box_inner {
-  transition:background-color 0.3s;
-  --box-bg:#fff;
+  transition: background-color 0.3s;
+  --box-bg: #fff;
   border-radius: 4px;
   margin: 0 0 0.5em;
-  padding: 0.2em 1em 0.2em;
-  background:var(--box-bg);
+  padding: 0.2em 1.5em 0.2em;
+  background: var(--box-bg);
   z-index: 0;
   box-shadow: 02px 01px 10px rgba(190, 190, 190, 0.382);
   color: var(--text);
 }
 .box_inner::before {
-  transition:all 0.3s;
+  transition: all 0.3s;
   content: "";
   width: 15px;
   height: 15px;
   position: absolute;
   top: 04px;
   left: -04px;
-  background:var(--box-bg);
+  background: var(--box-bg);
   transform: rotate(45deg);
   z-index: -1;
 }
@@ -313,7 +359,7 @@ li:last-of-type .skala {
 :is(.name, .date, .content):focus {
   border: none;
   outline: none;
-  color: rgb(2, 94, 17);
+  color: var(--btn-active);
   background: rgb(255, 255, 255);
 }
 p {
@@ -321,14 +367,18 @@ p {
   max-width: 25ch;
 }
 .editable {
- 
-  cursor: crosshair;
+  cursor: cell;
 }
+
 .name {
   text-transform: uppercase;
   font-size: 1.1rem;
   font-weight: 800;
-  
+}.name + svg{
+  position: absolute;
+  right:-1em;
+
+  top:3px
 }
 .date {
   padding: 0em 0;
@@ -337,7 +387,11 @@ p {
   font-size: 1.4rem;
   margin: 0 0 0.2em;
   color: var(--text-accent);
-  
+}.content + svg{
+  position: absolute;
+  right:-1em;
+
+  top:3px
 }
 .content {
   padding: 0em 0.5em 0.5em;
@@ -353,7 +407,7 @@ p {
   height: 24px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -367,8 +421,8 @@ p {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -379,8 +433,8 @@ p {
   left: 5px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {

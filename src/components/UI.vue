@@ -146,7 +146,7 @@ export default {
       isVisible: false,
       isXvisible: true,
       listItem: {
-        id:function(){return Math.random()},
+        id:'',
         name: "Simple timeliner",
         date: "",
         formatedDate: "",
@@ -162,6 +162,7 @@ export default {
         this.listItem.content.length &&
         this.listItem.date.length
       ) {
+        this.listItem.id=Math.random().toString().split('.')[1]
         let formDate = new Intl.DateTimeFormat(this.lang, {
           calendar: "gregory",
           year: "numeric",
