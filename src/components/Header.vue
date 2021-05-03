@@ -3,7 +3,7 @@
       <div class="wrapper">
          <div class="svg_container"> 
              <!-- <svg fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 223 61"><defs/><g fill="none" stroke="var(--bg-tl)"><circle cx="12.526" cy="48.358" r="10.56" stroke-width="3.93"/><circle cx="165.04" cy="40.537" r="10.56" stroke-width="3.93"/><circle cx="82.797" cy="12.526" r="10.56" stroke-width="3.93"/><circle cx="209.85" cy="17.446" r="10.56" stroke-width="3.93"/><path stroke-width="3.93" d="M27.704 40.537l39.76-20.488"/><path stroke-width="3.79" d="M180.378 32.634l14.181-7.308"/><path stroke-width="3.97" d="M99.017 18.051l49.807 16.964"/></g></svg> -->
-             <svg :class="{active:isActive}" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 223 61" width="223" height="61"><defs></defs><g fill="none" stroke="#eeeeee"><circle cx="12.526" cy="48.358" r="10.56" stroke-width="3.93" class="svg-elem-1"></circle><circle cx="165.04" cy="40.537" r="10.56" stroke-width="3.93" class="svg-elem-2"></circle><circle cx="82.797" cy="12.526" r="10.56" stroke-width="3.93" class="svg-elem-3"></circle><circle cx="209.85" cy="17.446" r="10.56" stroke-width="3.93" class="svg-elem-4"></circle><path stroke-width="3.93" d="M27.704 40.537l39.76-20.488" class="svg-elem-5"></path><path stroke-width="3.79" d="M180.378 32.634l14.181-7.308" class="svg-elem-6"></path><path stroke-width="3.97" d="M99.017 18.051l49.807 16.964" class="svg-elem-7"></path></g></svg>
+             <svg :class="{active:headActive}" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 223 61" width="223" height="61"><defs></defs><g fill="none" stroke="#eeeeee"><circle cx="12.526" cy="48.358" r="10.56" stroke-width="3.93" class="svg-elem-1"></circle><circle cx="165.04" cy="40.537" r="10.56" stroke-width="3.93" class="svg-elem-2"></circle><circle cx="82.797" cy="12.526" r="10.56" stroke-width="3.93" class="svg-elem-3"></circle><circle cx="209.85" cy="17.446" r="10.56" stroke-width="3.93" class="svg-elem-4"></circle><path stroke-width="3.93" d="M27.704 40.537l39.76-20.488" class="svg-elem-5"></path><path stroke-width="3.79" d="M180.378 32.634l14.181-7.308" class="svg-elem-6"></path><path stroke-width="3.97" d="M99.017 18.051l49.807 16.964" class="svg-elem-7"></path></g></svg>
              
          </div>
           <h1>Simple timeliner</h1>
@@ -13,13 +13,14 @@
 
 <script>
 export default {
+  props:['headActive'],
     data(){
         return{
-            isActive:false
+            
         }
     },
     mounted(){
-      setTimeout(()=>{this.isActive=true},100)  
+      
     }
 }
 </script>
@@ -78,8 +79,8 @@ export default {
 svg .svg-elem-1 {
   stroke-dashoffset: 68.35043684381644px;
   stroke-dasharray: 68.35043684381644px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.2s;
-          transition: stroke-dashoffset 1s ease-out 0.2s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.2s;
+          transition: stroke-dashoffset 0.7s ease-out 0.2s;
 }
 
 svg.active .svg-elem-1 {
@@ -89,8 +90,8 @@ svg.active .svg-elem-1 {
 svg .svg-elem-2 {
   stroke-dashoffset: 68.35043684381644px;
   stroke-dasharray: 68.35043684381644px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.32s;
-          transition: stroke-dashoffset 1s ease-out 0.32s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.32s;
+          transition: stroke-dashoffset 0.7s ease-out 0.32s;
 }
 
 svg.active .svg-elem-2 {
@@ -100,8 +101,8 @@ svg.active .svg-elem-2 {
 svg .svg-elem-3 {
   stroke-dashoffset: 68.35043684381644px;
   stroke-dasharray: 68.35043684381644px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.44s;
-          transition: stroke-dashoffset 1s ease-out 0.44s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.44s;
+          transition: stroke-dashoffset 0.7s ease-out 0.44s;
 }
 
 svg.active .svg-elem-3 {
@@ -111,8 +112,8 @@ svg.active .svg-elem-3 {
 svg .svg-elem-4 {
   stroke-dashoffset: 68.35043684381644px;
   stroke-dasharray: 68.35043684381644px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.56s;
-          transition: stroke-dashoffset 1s ease-out 0.56s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.56s;
+          transition: stroke-dashoffset 0.7s ease-out 0.56s;
 }
 
 svg.active .svg-elem-4 {
@@ -122,8 +123,8 @@ svg.active .svg-elem-4 {
 svg .svg-elem-5 {
   stroke-dashoffset: 46.72823715209961px;
   stroke-dasharray: 46.72823715209961px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.6799999999999999s;
-          transition: stroke-dashoffset 1s ease-out 0.6799999999999999s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.6799999999999999s;
+          transition: stroke-dashoffset 0.7s ease-out 0.6799999999999999s;
 }
 
 svg.active .svg-elem-5 {
@@ -133,8 +134,8 @@ svg.active .svg-elem-5 {
 svg .svg-elem-6 {
   stroke-dashoffset: 17.953295707702637px;
   stroke-dasharray: 17.953295707702637px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.8s;
-          transition: stroke-dashoffset 1s ease-out 0.8s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.8s;
+          transition: stroke-dashoffset 0.7s ease-out 0.8s;
 }
 
 svg.active .svg-elem-6 {
@@ -144,8 +145,8 @@ svg.active .svg-elem-6 {
 svg .svg-elem-7 {
   stroke-dashoffset: 54.61668395996094px;
   stroke-dasharray: 54.61668395996094px;
-  -webkit-transition: stroke-dashoffset 1s ease-out 0.9199999999999999s;
-          transition: stroke-dashoffset 1s ease-out 0.9199999999999999s;
+  -webkit-transition: stroke-dashoffset 0.7s ease-out 0.9199999999999999s;
+          transition: stroke-dashoffset 0.7s ease-out 0.9199999999999999s;
 }
 
 svg.active .svg-elem-7 {

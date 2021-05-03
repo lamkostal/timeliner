@@ -1,5 +1,5 @@
 <template>
-  <div class="modal_container" v-if="modalOpen" @click="modalOpen=false">
+  <div class="modal_container" v-if="modalOpen" @click="closeModal">
       <div class="modal_content">
           <p>Welcome to simple timeliner</p>
           <span>a tool to create timelines</span>
@@ -23,6 +23,12 @@ export default {
 data(){
     return{
         modalOpen:false
+    }
+},
+methods:{
+    closeModal(){
+        this.modalOpen=false
+        this.$emit('modalClose')
     }
 },
 mounted(){

@@ -34,8 +34,8 @@
         </div>
       </div>
       <div class="wrap">
-        <ul>
-          <li v-for="(item, index) in sortByDate" :key="item.id">
+        <transition-group tag='ul' name="list" mode="out-in">
+          <li v-for="(item, index) in sortByDate" :key="item.id" class="list-item">
             <transition name="fade">
               <button
                 class="close"
@@ -56,7 +56,8 @@
               ></div
             ></transition>
             <div class="box">
-              <transition appear @enter="enter" @leave="leave">
+              <transition  appear @enter="enter" 
+              >
                 <div
                   class="box_inner"
                   :style="[isDarkmode ? userStyle : { 'box-bg': 'white' }]"
@@ -130,7 +131,7 @@
               </transition>
             </div>
           </li>
-        </ul>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -167,19 +168,23 @@ export default {
     },
     leave(el, done) {
       console.log("leave");
-      gsap.to(el, { duration: 0.8, transformOrigin: "0 0", opacity: 0 });
-      done();
+      gsap.to(el, { duration: 0.8,
+       transformOrigin: "0 0",
+        opacity: 0,
+        onComplete:done
+         });
+      
     },
     removeItem(i) {
       this.$emit("removeItem", i);
     },
    
     editName(event, index) {
-      console.log("emit edit from list");
+     
       this.$emit("editName", { edit: event.target.innerText, index: index });
     },
     editContent(event, index) {
-      console.log("emit edit from list");
+     
       this.$emit("editContent", { edit: event.target.innerText, index: index });
     },
   },
@@ -454,5 +459,22 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* TRANSITIONS */
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(-15px);
+}
+.list-move{
+  transition:transform  0.3s ease;
+}
+.list-item{
+  transition: all 1s;
+  /* display: inline-block; */
 }
 </style>

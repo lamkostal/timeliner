@@ -1,6 +1,6 @@
 <template>
- <transition name="fade"> <Modal /></transition>
-  <Header />
+ <transition name="fade"> <Modal @modalClose='triggerHeadAnim' /></transition>
+  <Header :headActive="headActive"/>
   <div class="container">
     <List :list="list" @removeItem="removeItem" 
     @editName="editName($event,index)"
@@ -27,9 +27,13 @@ export default {
   data() {
     return {
       list: [],
+      headActive:false
     };
   },
   methods: {
+    triggerHeadAnim(){
+      this.headActive=true
+    },
     addItem(e) {
       this.list = e.list;
     },
@@ -85,8 +89,8 @@ body {
   --accent: hsl(160, 77%, 48%);
   --accent-h: hsl(160, 100%, 8%);
   --text: rgb(42, 43, 46);
-  --text-accent: #478ac2;
-  --btn-active:rgb(104, 50, 255);
+  --text-accent: #3a8ccf;
+  --btn-active: #5316ff;
 }
 .container {
   display: grid;
@@ -118,4 +122,5 @@ body {
   transform: translateX(20px);
   opacity: 0;
 }
+
 </style>

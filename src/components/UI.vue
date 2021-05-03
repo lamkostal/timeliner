@@ -290,7 +290,7 @@ export default {
 
 <style>
 .ui {
-  padding: 9em 3em 01em;
+  padding: 8em 3em 2em;
 }
 form {
   display: flex;
