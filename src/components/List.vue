@@ -463,18 +463,24 @@ input:checked + .slider:before {
 
 /* TRANSITIONS */
 
+
 .list-enter-active, .list-leave-active {
-  transition: all 1s;
+  transition: all 0.5s;
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+.list-enter-from /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: translateX(-15px);
+}
+.list-leave-to{
+  opacity: 0;
+  transform: translateX(-35px);
+
+}
+
+.list-item{
+  transition: all 0.5s ease-in-out;
+  display: inline-block;
 }
 .list-move{
   transition:transform  0.3s ease;
-}
-.list-item{
-  transition: all 1s;
-  /* display: inline-block; */
 }
 </style>

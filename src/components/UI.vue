@@ -139,6 +139,7 @@ import domtoimage from "dom-to-image";
 import {gsap} from 'gsap';
  
 export default {
+  props:['list'],
   data() {
     return {
       lang: "en-GB",
@@ -152,7 +153,7 @@ export default {
         formatedDate: "",
         content: "Welcome to my simple timeline tool",
       },
-      list: [],
+      
     };
   },
   methods: {
@@ -279,11 +280,7 @@ export default {
     },
   },
   mounted() {
-    let retrieveddata = localStorage.getItem('mylist') 
-   console.log(retrieveddata)
-   let storedList = JSON.parse(retrieveddata)
-
-    this.list = storedList   || []
+  
   },
 };
 </script>

@@ -6,7 +6,7 @@
     @editName="editName($event,index)"
     @editContent="editContent($event,index)"
     />
-    <UI @addItem="addItem" @clearList="clearList" @saveList="saveList" />
+    <UI @addItem="addItem" @clearList="clearList" @saveList="saveList" :list="list"/>
   </div>
 </template>
 
