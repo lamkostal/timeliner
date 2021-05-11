@@ -5,8 +5,9 @@
     <List :list="list" @removeItem="removeItem" 
     @editName="editName($event,index)"
     @editContent="editContent($event,index)"
+    :isXvisible='isXvisible'
     />
-    <UI @addItem="addItem" @clearList="clearList" @saveList="saveList" :list="list"/>
+    <UI @addItem="addItem" @clearList="clearList" @saveList="saveList" :list="list" @xInvisible='isXvisible=false' />
   </div>
 </template>
 
@@ -26,6 +27,7 @@ export default {
   },
   data() {
     return {
+      isXvisible: true,
       list: [],
       headActive:false
     };

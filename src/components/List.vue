@@ -141,13 +141,12 @@
 import { gsap } from "gsap";
 
 export default {
-  props: ["list"],
+  props: ["list","isXvisible"],
 
   data() {
     return {
       boxbg: "#051e35",
       isVisible: false,
-      isXvisible: false,
       isDarkmode: false,
       bullet: {
         color: "#003663",
@@ -203,6 +202,7 @@ export default {
   mounted() {
     // console.log(this.sortByDate);
     console.log(window.innerWidth);
+    console.log(this.isXvisible);
 
     if (window.innerWidth < 1000) {
       this.isXvisible = true;

@@ -145,7 +145,6 @@ export default {
       lang: "en-GB",
       selection: "2-digit",
       isVisible: false,
-      isXvisible: true,
       listItem: {
         id:'',
         name: "Simple timeliner",
@@ -207,29 +206,36 @@ export default {
 
     },
     savePng() {
-      this.isXvisible = false;
-      if (this.list.length) {
-        let tl = document.querySelector(".wrap");
-        domtoimage
-          .toPng(tl)
-          .then(function (dataUrl) {
-            var img = new Image();
-            img.src = dataUrl;
-            // document.body.appendChild(img);
-            var link = document.createElement("a");
-            link.download = "mytimeline";
+            this.setXinvisible()
+            //wait for x to become invisible cause of transitions
+    setTimeout(()=>{
+        if (this.list.length) {
+          let tl = document.querySelector(".wrap");
+          domtoimage
+            .toPng(tl)
+            .then(function (dataUrl) {
+              var img = new Image();
+              img.src = dataUrl;
+              // document.body.appendChild(img);
+              var link = document.createElement("a");
+              link.download = "mytimeline";
 
-            link.href = dataUrl;
-            link.click();
-          })
-          .catch(function (error) {
-            console.error("oops, something went wrong!", error);
-          });
-      }
-    },
+              link.href = dataUrl;
+              link.click();
+            })
+            .catch(function (error) {
+              console.error("oops, something went wrong!", error);
+            });
+        }
+    },400)
+      
+      },
     saveJpeg() {
-      this.isXvisible = false;
-      if (this.list.length) {
+
+            this.setXinvisible()
+
+      setTimeout(()=>{
+         if (this.list.length) {
         let tl = document.querySelector(".wrap");
         domtoimage
           .toJpeg(tl, { bgcolor: "#fff" })
@@ -246,10 +252,13 @@ export default {
             console.error("oops, something went wrong!", error);
           });
       }
+      },400)
+     
     },
     saveSvg() {
-      this.isXvisible = false;
-      if (this.list.length) {
+      this.setXinvisible()
+      setTimeout(()=>{
+          if (this.list.length) {
         let tl = document.querySelector(".wrap");
         domtoimage
           .toSvg(tl)
@@ -268,7 +277,13 @@ export default {
             console.error("oops, something went wrong!", error);
           });
       }
+      },400)
+    
     },
+    setXinvisible(){
+      this.$emit('xInvisible')
+      console.log('i became xinvisible')
+    }
   },
   computed: {
     fieldsFull() {
