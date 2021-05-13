@@ -166,7 +166,7 @@ export default {
       });
     },
     leave(el, done) {
-      console.log("leave");
+      // console.log("leave");
       gsap.to(el, { duration: 0.8,
        transformOrigin: "0 0",
         opacity: 0,
@@ -201,8 +201,8 @@ export default {
   },
   mounted() {
     // console.log(this.sortByDate);
-    console.log(window.innerWidth);
-    console.log(this.isXvisible);
+    // console.log(window.innerWidth);
+    // console.log(this.isXvisible);
 
     if (window.innerWidth < 1000) {
       this.isXvisible = true;

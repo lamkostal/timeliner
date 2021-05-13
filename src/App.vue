@@ -54,17 +54,17 @@ export default {
     },
     saveList() {
       localStorage.setItem("mylist", JSON.stringify(this.list));
-      console.log("listsaved");
+      // console.log("listsaved");
     },
   },
 
   mounted() {
     let retrieveddata = localStorage.getItem("mylist");
-    console.log(retrieveddata);
+    // console.log(retrieveddata);
     let storedList = JSON.parse(retrieveddata);
 
     this.list = storedList || [];
-    console.log("list from app:" + this.list);
+    // console.log("list from app:" + this.list);
   },
 };
 </script>

@@ -175,7 +175,7 @@ export default {
         this.list.push(this.listItem);
         this.listItem = { name: "", date: "", content: "", bullet: {} };
         this.$emit("addItem", { list: this.list });
-        console.log("emited");
+        // console.log("emited");
       }
     },
     clearList() {
@@ -263,7 +263,7 @@ export default {
         domtoimage
           .toSvg(tl)
           .then(function (dataUrl) {
-            console.log(dataUrl);
+            // console.log(dataUrl);
 
             var img = new Image();
             img.src = dataUrl;
@@ -282,7 +282,7 @@ export default {
     },
     setXinvisible(){
       this.$emit('xInvisible')
-      console.log('i became xinvisible')
+      // console.log('i became xinvisible')
     }
   },
   computed: {

@@ -13,6 +13,7 @@
           </ul>
             <p>Enjoy!</p>
             <span class="asterisc">*saving uses browsers local storage, erasing browsing data will affect your saves.</span>
+           <div> <input type="checkbox" @focusout="modalPreference" v-model="checkbox"><span class="asterisc">Don't show this again</span></div>
 
       </div>
   </div>
@@ -22,17 +23,24 @@
 export default {
 data(){
     return{
-        modalOpen:false
+        modalOpen:false,
+        checkbox:false
     }
 },
 methods:{
     closeModal(){
         this.modalOpen=false
         this.$emit('modalClose')
-    }
+    },
+    modalPreference(){
+        localStorage.setItem('modalCheck',JSON.stringify( this.checkbox ))
+    },
 },
 mounted(){
-    this.modalOpen=true
+    let check = localStorage.getItem('modalCheck')
+    let retrievedCheck = JSON.parse(check)
+    // console.log('check modal:'+retrievedCheck)
+    this.modalOpen=!retrievedCheck
 }
 
 }
@@ -43,7 +51,7 @@ mounted(){
 .asterisc{
     font-size: 0.8rem;
     position: relative;
-    padding:  0 1em;
+    padding:  0 0.5em;
     bottom:0;
     left: 0;
 }
