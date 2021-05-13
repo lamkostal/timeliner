@@ -39,6 +39,8 @@ methods:{
 mounted(){
     let check = localStorage.getItem('modalCheck')
     let retrievedCheck = JSON.parse(check)
+       
+    if(retrievedCheck){ setTimeout(()=>{this.$emit('modalClose')},200)}
     // console.log('check modal:'+retrievedCheck)
     this.modalOpen=!retrievedCheck
 }
