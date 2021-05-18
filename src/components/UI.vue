@@ -354,6 +354,7 @@ form {
   color: rgb(5, 2, 29);
   font-size: 1.2rem;
   font-family: "Open Sans";
+  margin: 0.2em;
 }
 .button:active{
   box-shadow: inset 0 0 15px #fff;
