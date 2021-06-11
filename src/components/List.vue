@@ -360,6 +360,9 @@ li:last-of-type .skala {
   transform: rotate(45deg);
   z-index: -1;
 }
+.entry-blok{
+  padding: 0 0.5em 0 0;
+}
 
 :is(.name, .date, .content):focus {
   border: none;
@@ -377,7 +380,7 @@ p {
 
 .name {
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
 }.name + svg{
   position: absolute;
@@ -400,7 +403,7 @@ p {
 }
 .content {
   padding: 0em 0.5em 0.5em;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
 }
 
