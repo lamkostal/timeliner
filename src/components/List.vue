@@ -385,7 +385,6 @@ p {
 }.name + svg{
   position: absolute;
   right:-1em;
-
   top:3px
 }
 .date {
