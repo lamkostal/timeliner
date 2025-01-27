@@ -147,7 +147,7 @@ export default {
       isVisible: false,
       listItem: {
         id:'',
-        name: "Simple timeliner",
+        name: "Simple timeliner by KD",
         date: "",
         formatedDate: "",
         content: "Welcome to my simple timeline tool",
