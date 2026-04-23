@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build"
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -16,6 +18,7 @@
     "@vue/cli-plugin-babel": "^5.0.9",
     "@vue/cli-service": "~5.0.9",
     "@vue/compiler-sfc": "^3.0.0",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "wrangler": "^4.84.1"
   }
 }
